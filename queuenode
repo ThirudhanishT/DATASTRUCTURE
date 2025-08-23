@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int data;
+	struct node* next;
+};
+struct node* head=NULL;
+void insertAtBegning(int l)
+{
+        struct node* newnode=malloc(sizeof(struct node));
+        newnode->data=l;
+        newnode->next=NULL;
+	if(head==NULL)
+		head=newnode;
+        else
+        {
+		newnode->next=head;
+		head=newnode;
+	}
+}
+void deleteAtLast()
+{
+        struct node* temp=head;
+        struct node* prev=NULL;
+        while(temp->next!=NULL)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=temp->next;
+        printf("The deleted element from the queue is: ");
+        printf("%d",temp->data);
+        printf("\n");
+        free(temp);
+}	
+void display()
+{
+        struct node* temp=head;
+        while(temp!=NULL)
+        {
+           printf("%d\n",temp->data);
+           temp=temp->next;
+        }
+        
+}
+
+int main()
+{
+	printf("---Menu---");
+        printf("\n1.To insert");
+        printf("\n2.To implement the queue operation");
+        printf("\n3.To display");
+        printf("\n4.To exit");
+        int n;
+        while(1)
+        {
+		printf("Enter your opinion: ");
+                scanf("%d",&n);
+                switch(n)
+           {
+       	   case 1:printf("Enter the number to insert: ");
+		  int l;
+		  scanf("%d",&l);
+		  insertAtBegning(l);
+                  break;
+
+           case 2:deleteAtLast();
+                  break;
+           
+           case 3:display();
+                  break;
+           
+           case 4:exit(0);
+
+           defaut:printf("INVALID ENTRY");
+           
+	}
+}
+}
