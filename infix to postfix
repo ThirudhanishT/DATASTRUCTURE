@@ -1,0 +1,83 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define s 9
+int size=-1;
+int stack[s];
+int precedence(char op)
+{
+    switch(op)
+    {
+        case '^':return 3;
+        case '*':return 2;
+        case '/':return 2;
+        case '+':return 1;
+        case '-':return 1;
+        default:return 0;
+    }
+}
+char operator(char a)
+{
+    return(a=='+' || a=='-' || a=='*' ||a=='/');
+}
+void push(char a)
+{
+    size=size+1;
+    stack[size]=a;
+}
+char pop()
+{
+    char y=stack[size];
+    size=size-1;
+    return y;
+}
+void conversion(char exp[],int n,char *prefix)
+{
+     int j=0;
+    for(int i=0;i<n;i++)
+    {
+       
+         prefix[j];
+        if(isalnum(exp[i]))
+        {
+            prefix[j]=exp[i];
+            j=j+1;
+        }
+        else if(exp[i]=='(' || exp[i]=='[' || exp[i]=='{')
+        {
+            push(exp[i]);
+        }
+        else if(exp[i]==')' || exp[i]==']' || exp[i]=='}')
+        {
+            while(exp[i]!='(')
+            {
+                 pop();
+            }
+            pop();
+        }
+        else if(operator(exp[i]))
+        {
+            while(size!=-1 && precedence(stack[size])>=precedence(exp[i]))
+            {
+            prefix[j]=pop();
+            j=j+1;
+            }
+            push(exp[i]);
+        }
+    }
+      while(size!=-1)
+        {
+            prefix[j]=pop();
+            j=j+1;
+        }
+    prefix[j]='\0';
+    printf("%s",prefix);
+}
+int main()
+{
+    printf("Enter the expression");
+    char exp[8];
+    char prefix[8];
+    scanf("%s",& exp);
+    conversion(exp,8,prefix);
+}
