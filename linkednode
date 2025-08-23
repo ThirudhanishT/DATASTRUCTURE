@@ -1,0 +1,175 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+};
+struct node* head=NULL;
+void insertAtBegining(int val)
+{
+    struct node* newnode=malloc(sizeof(struct node));
+    newnode->data=val;
+    newnode->next=NULL;
+    if(head==NULL)
+    {
+       head=newnode;
+    }
+    else
+    {
+       newnode->next=head;
+       head=newnode;
+    }
+}
+void insertAtMiddle(int p,int val)
+{
+    struct node* temp=head;
+    struct node* newnode=malloc(sizeof(struct node));
+    newnode->data=val;
+    newnode->next=NULL;
+    int i=1;
+    while(i<p)
+    {
+       temp=temp->next;
+       i++;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+void deleteAtFirst()
+{
+    if(head==NULL)
+        printf("The node is empty cannot delete");
+    struct node* temp=head;
+    head=head->next;
+    free(temp);
+}
+void deleteAtMiddle(int p)
+{
+    struct node* temp=head;
+    struct node* prev=NULL;
+    int i=1;
+    while(i<=p)
+    {
+        prev=temp;
+        temp=temp->next;
+        i++;
+    }
+    prev->next=temp->next;
+    free(temp);
+}   
+void display()
+{
+    struct node* temp=head;
+    if(head==NULL)
+       printf("\nThe node is empty cannot print");
+    else
+    {
+    while(temp!=NULL)
+    {
+      printf("%d\n",temp->data);
+      temp=temp->next;
+    }
+    }
+}
+void delete(int num)
+{
+    struct node* temp=head;
+    struct node* prev=NULL;
+    while(temp->data!=num)
+    {
+       prev=temp;
+       temp=temp->next;
+    }
+    if(temp!=num)
+    {
+        printf("The number is not present");
+    }
+    prev->next=temp->next;
+    free(temp);
+}
+void insertLast(int k)
+{
+    struct node* temp=head;
+    struct node*newnode=malloc(sizeof(struct node));
+    newnode->data=k;
+    newnode->next=NULL;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=newnode;
+}
+int main()
+{
+   while(1)
+   { 
+    printf("\n---The menu to insertor delete---");
+    printf("\nIf want to insert at beginning press  : 1");
+    printf("\nIf want to insert at middle press     : 2");
+    printf("\nIf want to delete at the first press  : 3");
+    printf("\nIf want to delete at the middle press : 4");
+    printf("\nIf want to delete given number press  : 5");
+    printf("\nTo print enter                        : 6");
+    printf("\nTo exit enter                         : 7");
+    printf("\nTo insert at last                     : 8");
+    int choice;
+    printf("\nEnter your opinion");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+       case 1:printf("\nEnter the value to insert");
+              int val;
+              scanf("%d",&val);
+              insertAtBegining(val);
+              break;
+
+       case 2:printf("\nTo insert the first node enter(0) ");
+              int p;
+              scanf("%d",&p);
+              printf("\nEnter the number to insert at the position");
+              int c;
+              scanf("%d",&c);              
+              if(p==0)
+              {
+                 insertAtBegining(c);
+              }
+              else
+              {
+                 insertAtMiddle(p,c);
+              }
+              break;
+  
+       case 3:deleteAtFirst();
+              break;
+
+       case 4:printf("\nEnter the position to delete ");
+              int q;
+              scanf("%d",&q); 
+              if(q==0)
+                 deleteAtFirst();
+              else 
+                 deleteAtMiddle(q);
+              break;
+
+       case 5:printf("\nEnter the number to delete: ");
+              int num;
+              scanf("%d",&num);
+              delete(num);
+              break;
+
+       case 6:display();
+              break;
+              
+       case 7:exit(0);
+    
+       case 8:printf("Enter the number to insert");
+              int k;
+              scanf("%d",&k);
+              insertLast(k);
+              break;
+       
+       default:printf("Invalid Entry");
+     }
+   }
+}
