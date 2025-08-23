@@ -49,7 +49,7 @@ void conversion(char exp[],int n,char *prefix)
         }
         else if(exp[i]==')' || exp[i]==']' || exp[i]=='}')
         {
-            while(exp[i]!='(')
+            while(top!=-1 && stack[i]!='(')
             {
                  pop();
             }
