@@ -1,0 +1,44 @@
+#include<stdio.h>
+#define size 10
+int top=-1;
+int stack[top];
+void push(char b)
+{
+    top=top+1;
+    stack[top]=b;
+}
+void pop()
+{
+    top=top-1;
+}
+void insert(char a[],int n)
+{
+    if(a[i]=='(')
+    {
+        push(a[i]);
+    }
+    else if(a[i]==')')
+    {
+        pop();
+    }
+}
+void check(int top)
+{
+    if(top==-1)
+    {
+        printf("THE BRACKETS ARE BALENCED");
+    }
+    else
+    {
+        printf("THE BRACKETS ARE NOT BALENCED");
+    }
+}
+int main()
+{
+    printf("Enter the size of the brackets expression:");
+    int n;
+    scanf("%d",&n);
+    char exp[n];
+    insert(exp,n);
+    check(top);
+}
