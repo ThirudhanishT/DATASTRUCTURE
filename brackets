@@ -40,7 +40,7 @@ int main()
 {
     printf("Enter the size of the brackets expression:");
     int n;
-    scanf("%d",&n);
+    scanf("%s",&n);
     char exp[n];
     insert(exp,n);
     check(top);
