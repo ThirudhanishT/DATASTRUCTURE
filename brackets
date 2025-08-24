@@ -1,7 +1,7 @@
 #include<stdio.h>
 #define size 10
 int top=-1;
-int stack[top];
+int stack[size];
 void push(char b)
 {
     top=top+1;
